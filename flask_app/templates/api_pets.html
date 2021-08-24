@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+  <title>
+   Pet
+  </title>
+  <!-- Favicon-->
+  <!-- Bootstrap icons-->
+  <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+   #results{
+     overflow: scroll;
+   }
+  </style>
+ </head>
+ <body>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <div class="container px-4 px-lg-5">
+    <a class="navbar-brand" href="#!">
+     Speaking for Pets
+    </a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+     <span class="navbar-toggler-icon">
+     </span>
+    </button>
+    <a class="collapse navbar-collapse" id="navbarSupportedContent">
+     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+      <li class="nav-item">
+       <a aria-current="page" class="nav-link active" href="/dashboard">
+        Home
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="/about">
+        About
+       </a>
+       <li class="nav-item dropdown">
+        <a class="nav-link" id="navbarDropdown" href="/input_search">Search for other pets</a>
+    </li>
+</ul>
+     </ul>
+     <a href="/account">
+      <button class="btn btn-outline-dark m-1" type="submit">
+       <i class="fas fa-dog">
+       </i>
+       Go to your Account
+      </button>
+     </a>
+     <a href="/logout">
+      <button class="btn btn-outline-dark m-1" type="submit">
+       Logout
+      </button>
+     </a>
+    </a>
+   </div>
+  </nav>
+  <!-- Header-->
+  <header class="bg-dark py-5">
+   <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+     <h1 class="display-4 fw-bolder" style="font-family: 'Dancing Script', cursive;">
+      Find your next pet
+     </h1>
+     <p class="lead fw-normal text-white-50 mb-0">
+      Feature Pets
+     </p>
+    </div>
+   </div>
+  </header>
+  <!-- Section-->
+  <div class="container">
+   <form id="pet-form" action="/search" method="POST">
+    <div class="form-group">
+     <label for="animal">
+      Animal
+     </label>
+     <select class="form-control form-control-lg mb-3" id="animal" name="animal">
+      <option value=""> 
+      </option>
+      <option value="cat">
+       Cat
+      </option>
+      <option value="dog">
+       Dog
+      </option>
+     </select>
+     {% with title_error = get_flashed_messages(category_filter=["animal"])%}
+                                        {% for message in title_error %}
+                                        <p class="col-8 text-danger">{{message}}</p>
+                                        {% endfor %}
+                                        {% endwith %}
+     <input class="form-control form-control-lg" id="zip" placeholder="Enter City, State" type="text" name="location"/>
+     {% with title_error = get_flashed_messages(category_filter=["location"])%}
+                                        {% for message in title_error %}
+                                        <p class="col-8 text-danger">{{message}}</p>
+                                        {% endfor %}
+                                        {% endwith %}
+     <input class="btn btn-dark btn-lg btn-block mt-3" type="submit" value="Find"/>
+    </div>
+   </form>
+   <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    {% if session["valid"] == True %}
+    {% for i in range(12) %}  
+    <div class="col mb-5">
+       <div class="card text-center" id="results">
+         <img src={{pics[i]}} alt="{{names[i]}}'s picture"><br>
+         <h5>{{names[i]}}</h5><br>
+         Age: {{ages[i]}}<br>
+         Breed:{{breeds[i]}}<br>
+         Gender:{{genders[i]}}<br>
+         Size:{{sizes[i]}}<br>
+         Online Profile: <a href={{urls[i]}}><button class="btn btn-warning m-1">Check it out</button></a>   
+         <a href="/new/application" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-outline-dark m-3">
+              Start an application
+          </button></a>
+       </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+   <div class="container">
+    <p class="m-0 text-center text-white">
+     Copyright © Speaking for pets 2021
+    </p>
+   </div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Core theme JS-->
+ </body>
+</html>

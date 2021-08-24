@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show application</title>
+    <style>
+        body{
+            padding:65px;
+            background-image: url("https://i.pinimg.com/originals/31/ca/6a/31ca6a000494b832e802c2a0c1c8d76c.jpg");
+            background-size:cover;
+        }
+
+    </style>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+    <div class="d-flex justify-content-end">
+        <a href="/account"> <button class="btn btn-outline-dark m-1">
+           <i class="fas fa-paw"></i>
+            Account page
+        </button></a>&nbsp;&nbsp;
+        <a href="/logout">
+        <button class="btn btn-outline-dark m-1">
+            Logout
+        </button></a>
+    </div>
+    
+    <h1 style="color: purple; font-family: Arial, Helvetica, sans-serif;">{{pet.name}}'s Adoption Application</h1>
+    
+    <h4>Adopter: {{user.first_name}} {{user.last_name}}</h4>
+
+        <div class="info">
+         <p><strong>Name:</strong> {{pet.name}}</p>
+         <p><strong>Age:</strong> {{pet.age}}</p>
+         <p><strong>Breed:</strong> {{pet.breed}}</p>
+         <p><strong>Gender:</strong> {{pet.gender}}</p>
+         <p><strong>Weight: </strong>{{pet.weight}}</p>
+         <p><strong>Description:</strong> {{pet.description}}</p>
+         <p><strong>Adopter older than 18:</strong> {{pet.adopter_old_enough}}</p>
+         <p><strong>Adopter has stable source of income:</strong> {{pet.adopter_stable_income}}</p>
+         <p><strong>Application Status:</strong> Approved</p>
+        </div>
+
+    </body>
+</html>

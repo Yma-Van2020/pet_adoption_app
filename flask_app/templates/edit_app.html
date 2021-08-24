@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>account page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/application.css') }}">
+    <style>
+        body {
+            background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/job562-nunoon-04-a-kl62t2ul.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=87c6f3173c45dbc117fbded913216717");
+            background-color: rgba(255,255,255,0.3);
+background-blend-mode: lighten;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div class="header">
+            <div>
+                <h1 style="color: #6c7ae0; font-family: Arial, Helvetica, sans-serif;">Edit {{user.first_name}}'s application</h1>
+                <h3 style="font-family: 'Dancing Script', cursive" class="mt-5">* Please start the application by
+                    filling out the pet's<br> and the adopter's information</h3>
+            </div>
+
+            <div>
+                <a href="/account">
+                <button class="btn btn-outline-dark m-1">
+                    <i class="fas fa-paw"></i>
+                    Account page
+                </button></a>
+                <a href="/logout">
+                <button class="btn btn-outline-dark m-1">
+                    Logout
+                </button></a>
+                
+            </div>
+        </div>
+
+        <form action="/edit/{{pet.id}}" method="POST" class="mt-5">
+            <div class="left">
+                <div class="form-group">
+                    <label for="n">Pet's name:</label>
+                    {% with title_error = get_flashed_messages(category_filter=["name"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <input type="text" class="form-control" name="name" id="n" value={{pet.name}}>
+                </div>
+                <div class="form-group">
+                    <label for="n">Pet's breed:</label>
+                    {% with title_error = get_flashed_messages(category_filter=["breed"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <input type="text" class="form-control" name="breed" id="n" value={{pet.breed}}>
+                </div>
+                <div class="form-group">
+                    <label for="n">Pet's age(year-old):</label>
+                    {% with title_error = get_flashed_messages(category_filter=["age"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <input  type="number" step="0.01" class="form-control" name="age" id="n" value={{pet.age}}>
+                </div>
+                <div class="form-group">
+                    <label for="n">Pet's gender:</label>
+                    {% with title_error = get_flashed_messages(category_filter=["gender"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <input type="text" class="form-control" name="gender" id="n" value={{pet.gender}}>
+                </div>
+                <div class="form-group">
+                    <label for="n">Pet's weight(kg):</label>
+                    {% with title_error = get_flashed_messages(category_filter=["weight"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <input type="number" step="0.01" class="form-control" name="weight" id="n" value={{pet.weight}}>
+                </div>
+                <div class="form-group">
+                    <label for="des">Pet's description:</label>
+                    {% with title_error = get_flashed_messages(category_filter=["description"])%}
+                    {% for message in title_error %}
+                    <p class="col-8 text-danger">{{message}}</p>
+                    {% endfor %}
+                    {% endwith %}
+                    <textarea type="text" class="form-control" name="description" id="des">{{pet.description}}</textarea>
+                </div>
+
+
+                <input type="submit" value="Apply Now" class="btn btn-warning">
+            </div>
+
+            <div class="right">
+
+                <p>Are you older than 18 years of age?</p>
+                {% with title_error = get_flashed_messages(category_filter=["adopter_old_enough"])%}
+                {% for message in title_error %}
+                <p class="col-8 text-danger">{{message}}</p>
+                {% endfor %}
+                {% endwith %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="adopter_old_enough" id="old" value="yes" checked/>
+                    <label class="form-check-label" for="old"> Yes </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="adopter_old_enough" id="young" value="no" />
+                    <label class="form-check-label" for="young"> No </label>
+                </div>
+
+                <p class="mt-5">Do you have a stable source of income?</p>
+                {% with title_error = get_flashed_messages(category_filter=["adopter_stable_income"])%}
+                {% for message in title_error %}
+                <p class="col-8 text-danger">{{message}}</p>
+                {% endfor %}
+                {% endwith %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="adopter_stable_income" id="stable" value="yes" checked/>
+                    <label class="form-check-label" for="stable"> Yes </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="adopter_stable_income" id="unstable"
+                        value="no" />
+                    <label class="form-check-label" for="unstable"> No </label>
+                </div>
+            </div>
+        </form>
+</body>
+
+</html>

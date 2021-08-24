@@ -1,0 +1,34 @@
+
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+      * {
+          padding: 0px;
+          margin: 0px;
+      }
+
+      body {
+          padding: 35px;
+          background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/job562-nunoon-04-a-kl62t2ul.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=87c6f3173c45dbc117fbded913216717");
+      }
+
+      .header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+      a {
+          padding-right: 35px;
+      }
+
+      form{
+        display: flex;
+        justify-content: space-around;
+    } 
+
+    .form-group{
+        margin:10px;
+    }
+
+    .apply{
+        margin-left: 10px;
+    }
+

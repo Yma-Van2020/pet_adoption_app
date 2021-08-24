@@ -1,0 +1,23 @@
+
+.table {
+    width: 650px;
+}
+
+body {
+    padding: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+a{
+    padding-right: 35px;
+}
+
+body{
+background-image: url("https://cdn.wallpapersafari.com/52/63/93l8vM.png");
+background-color: rgba(255,255,255,0.3);
+background-blend-mode: lighten;
+}
