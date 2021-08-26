@@ -6,6 +6,7 @@ This is a pet adoption app aiming to provide a smooth user experience and give e
 ## Technologies
 
 Project is created with:
+
 * JS/jquery
 * Python3
 * Html/Css/Fontawesome
@@ -14,11 +15,8 @@ Project is created with:
 * Flask
 * RESTFUL API
 * Bcrypt
-<<<<<<< HEAD
-=======
 * SCSS
 * Less
->>>>>>> 56236499f6759de9170f5366f261e98355cdb6c3
 
 ## Features
 
