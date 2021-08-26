@@ -13,6 +13,8 @@ Project is created with:
 * Flask
 * RESTFUL API
 * Bcrypt
+* SCSS
+* LESS
 
 ## Features
 * Login/ Registration validation with flash
