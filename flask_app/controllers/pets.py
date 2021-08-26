@@ -23,7 +23,10 @@ def add_new_re():
        
     if 'user_id' not in session:
         return redirect('/')
-    print(request.form)
+   
+    if Pet.getOnebyname(session["name"]) != False:
+        flash("Pet is already adopted, pick another one!", "name")
+        return redirect("/new/application")
     
     data = {
         "name" : request.form["name"],
@@ -41,6 +44,7 @@ def add_new_re():
         return redirect("/new/application")
    
     Pet.create(data)
+    session["name"] = request.form["name"]
     return redirect('/account')
 
 @app.route("/pet/<int:pet_id>")
@@ -127,6 +131,8 @@ def about():
 
 @app.route("/input_search")
 def search():
+    session["valid"] = False 
+
     return render_template("api_pets.html")
 
 @app.route("/search" , methods=['POST'])
@@ -176,6 +182,7 @@ def api():
         breeds.append(cats.get("animals")[i].get("breeds").get("primary"))
         sizes.append(cats.get("animals")[i].get("size"))
     
-    
+    session.pop("animal")
+    session.pop("location")
     return render_template("api_pets.html", names=names, pics= pics, urls=urls, ages=ages,genders=genders,breeds=breeds,sizes=sizes)
 

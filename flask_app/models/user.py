@@ -11,7 +11,8 @@ class User:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
-        self.email = data['email']              
+        self.email = data['email']  
+        self.email_is_confirm = data['email_is_confirm']            
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -22,7 +23,7 @@ class User:
     
     @classmethod
     def create(cls, data ):
-        query = "INSERT INTO users ( first_name , last_name , email , password, created_at, updated_at ) VALUES ( %(first_name)s , %(last_name)s , %(email)s ,%(password)s, NOW() , NOW() );"
+        query = "INSERT INTO users ( first_name , last_name , email ,email_is_confirm, password, created_at, updated_at ) VALUES ( %(first_name)s , %(last_name)s , %(email)s ,%(email_is_confirm)s, %(password)s, NOW() , NOW() );"
         return connectToMySQL(DATABASE).query_db( query, data )
     
     @classmethod
@@ -31,30 +32,28 @@ class User:
         query = "SELECT * FROM users LEFT JOIN pets ON pets.user_id = users.id WHERE users.id = %(id)s;"
         
         results = connectToMySQL(DATABASE).query_db( query , data )
-        print(results)
-        print("*"*80)
+    
         if len(results) < 1:
             return False
         user = cls( results[0] )
         
         for row_from_db in results:
-            print(row_from_db)
-            print("^"*80)
-            pet_data = {
-                "id" : row_from_db["pets.id"],
-                "breed" : row_from_db["breed"],
-                "age" : row_from_db["age"],
-                "created_at" : row_from_db["pets.created_at"],
-                "updated_at" : row_from_db["pets.updated_at"],
-                "name" : row_from_db["name"],
-                "gender" : row_from_db["gender"],
-                "weight" : row_from_db["weight"],
-                "description" : row_from_db["description"],
-                "adopter_old_enough" : row_from_db["adopter_old_enough"],
-                "adopter_stable_income" : row_from_db["adopter_stable_income"],
-                "user_id":row_from_db["user_id"]
-            }
-            user.pets.append(pet.Pet( pet_data )) 
+            if row_from_db["pets.id"] != None:
+                pet_data = {
+                    "id" : row_from_db["pets.id"],
+                    "breed" : row_from_db["breed"],
+                    "age" : row_from_db["age"],
+                    "created_at" : row_from_db["pets.created_at"],
+                    "updated_at" : row_from_db["pets.updated_at"],
+                    "name" : row_from_db["name"],
+                    "gender" : row_from_db["gender"],
+                    "weight" : row_from_db["weight"],
+                    "description" : row_from_db["description"],
+                    "adopter_old_enough" : row_from_db["adopter_old_enough"],
+                    "adopter_stable_income" : row_from_db["adopter_stable_income"],
+                    "user_id":row_from_db["user_id"]
+                }
+                user.pets.append(pet.Pet( pet_data )) 
         return user
     
     @classmethod
@@ -84,11 +83,10 @@ class User:
     
     @classmethod
     def update(cls,data):
-        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s, updated_at = NOW() WHERE id = %(id)s"
+        query = "UPDATE users SET email_is_confirm = %(email_is_confirm)s, updated_at = NOW() WHERE id = %(id)s"
         return connectToMySQL(DATABASE).query_db(query,data)
     
     
-      
     @staticmethod
     def validate_user(data):
         is_valid = True 

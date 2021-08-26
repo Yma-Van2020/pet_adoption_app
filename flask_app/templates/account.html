@@ -49,8 +49,21 @@
                         Go back
                     </button></a>
             </div>
-
         </div>
+               <!-- account verification alert -->
+             {% if not session["email_is_confirm"] %}
+            <div class="alert alert-warning d-flex justify-content-between" role="alert">
+                 You have NOT verify your account! Please check your email inbox
+              <input type="button" value="Close" class="btn btn-warning" onclick="hide()"/>
+            </div>
+            {% else %}
+            <div class="alert alert-success d-flex justify-content-between" role="alert">
+                You have verify your account!
+             <input type="button" value="Close" class="btn btn-success" onclick="hide()"/>
+           </div>
+            {% endif %}
+      
+          
         <h3 style="font-family: 'Dancing Script', cursive;" class="ml-5 mt-5">Pet Adoption History</h3>
         <div class="table">
             <div class="limiter">
@@ -72,16 +85,20 @@
         
                             <div class="table100-body js-pscroll">
                                 <table>
+
                                     <tbody>
-                                        {% for pet in user.pets: %}
+        
+                                        {% for pet in user.pets %}
                                         <tr class="row100 body">
                                             <td class="cell100 column1">{{pet.name}}</td>
                                             <td class="cell100 column2">{{pet.created_at.strftime("%B %d, %Y")}}</td>
                                             <td class="cell100 column3"><a href="/pet/{{pet.id}}">view application &nbsp;<i class="fas fa-eye"></i></a>{%if session['user_id'] == pet.user_id%} <a href="/pet/{{pet.id}}/edit">edit &nbsp;<i class="fas fa-edit"></i></a>  <a href="/pet/{{pet.id}}/delete">delete &nbsp;<i class="far fa-trash-alt"></i></a> {%endif%}</td>
                                         </tr>
-                                        {% endfor %}
-                </tbody>
-            </table>
+                                        {% endfor %}    
+                                       
+                                         </tbody>
+                              
+                    </table>
         </div>
     </div>
 
@@ -105,7 +122,11 @@
 			})
 		});
 			
-		
+		var msg = document.querySelector(".alert")
+        function hide(){
+            msg.remove();
+        }
+
 	</script>
 <!--===============================================================================================-->
 

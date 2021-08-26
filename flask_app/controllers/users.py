@@ -1,10 +1,29 @@
 from flask_app import app
-from flask import render_template,redirect,request,session,flash
+from flask import render_template,redirect,request,session,flash,Flask,url_for
 from flask_bcrypt import Bcrypt   
 bcrypt = Bcrypt(app)  
 from flask_app.models.user import User
 from flask_app.models.pet import Pet
 from flask_app.controllers import pets
+from flask_mail import Mail, Message
+import os
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+
+
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": os.environ.get("EMAIL_USER"),
+    "MAIL_PASSWORD": os.environ.get("EMAIL_PASSWORD")
+}
+
+app.config.update(mail_settings)
+
+mail = Mail(app)
+
+s = URLSafeTimedSerializer("thisisasecret")
 
 @app.route("/")
 def index():
@@ -24,14 +43,43 @@ def register():
         "first_name": request.form['first_name'],
         "last_name": request.form['last_name'],
         "email": request.form['email'],
-        "password" : pw_hash
+        "password" : pw_hash,
+        "email_is_confirm": "False"
     }
-
+    
+    session["email_is_confirm"] = False
+    email = request.form['email']
+    token = s.dumps(email, salt="email-confirm")
+    
+    msg = Message("Confirm Email from Speaking for Pets", sender="candicema2018@gmail.com", recipients=[email])
+    
+    link = url_for("confirm_email", token=token, _external=True)
+    
+    msg.body = f"Please click the link below to confirm your email: {link}"
+    
+    mail.send(msg)
+    
     user_id = User.create(data)
     session["user_id"] = user_id 
-    return redirect('/')
-
     
+    return f"<h1> The email you entered is {email}.<br>Please go to your inbox to confirm your email!</h1>"
+
+@app.route("/confirm_email/<token>")
+def confirm_email(token):
+    try:
+        email = s.loads(token, salt="email-confirm", max_age = 3600)
+    except SignatureExpired:
+        return "<h1>The token is expired!</h1>"
+    data = {
+        "id": session["user_id"],
+        "email_is_confirm": "True"
+    }
+    User.update(data)
+    session["email_is_confirm"] = True
+    root = "/"
+    return f"<h1>Email has been confirm successfully</h1><br><a href={root}>Go back to login page</a>"
+    
+  
 @app.route('/login', methods=['POST'])
 def login():
     data = { "email" : request.form["lemail"] }
@@ -80,5 +128,6 @@ def acc():
         "id":session['user_id']
     }
     user = User.get_user_with_pets(data)
-        
+    print(session)
+    print("Hi")
     return render_template('account.html',user=user)

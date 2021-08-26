@@ -35,6 +35,14 @@ class Pet:
         query ="INSERT INTO pets (breed, age, created_at, updated_at, name, gender, weight, description, user_id, adopter_old_enough, adopter_stable_income) VALUES (%(breed)s, %(age)s, NOW(), NOW(), %(name)s, %(gender)s, %(weight)s, %(description)s, %(user_id)s, %(adopter_old_enough)s, %(adopter_stable_income)s)"
         return connectToMySQL(DATABASE).query_db(query,data)
         
+    @classmethod
+    def getOnebyname(cls, name):
+        query = "SELECT * FROM pets WHERE name = %(name)s"
+        data = {'name':name}
+        results = connectToMySQL(DATABASE).query_db(query,data)
+        if len(results) < 1:
+            return False
+        return cls( results[0])
     
     @classmethod
     def getOneById(cls, id):
@@ -70,7 +78,7 @@ class Pet:
         if len(data['gender']) < 1 :
             flash("* Gender cannot be empty", "gender")
             is_valid = False
-        if data['age'] == "":
+        if data['weight'] == "":
             flash("* Weight cannot be empty", "weight")
             is_valid = False
         if len(data['description']) < 1 :
