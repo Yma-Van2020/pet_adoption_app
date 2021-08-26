@@ -1,7 +1,7 @@
 
 # peaking for Pets - Pet Adoption App
 
-This is a pet adoption app aiming to give users acceess to the Petfinder API
+This is a pet adoption app aiming to provide a smooth user experience and give easy acceess to the Petfinder API
 
 ## Technologies
 Project is created with:
