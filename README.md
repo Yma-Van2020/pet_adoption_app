@@ -14,7 +14,7 @@ Project is created with:
 * RESTFUL API
 * Bcrypt
 * SCSS
-* LESS
+* Less
 
 ## Features
 * Login/ Registration validation with flash
