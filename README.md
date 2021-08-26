@@ -4,6 +4,7 @@
 This is a pet adoption app aiming to give users acceess to the Petfinder API
 
 ## Technologies
+
 Project is created with:
 * JS/jquery
 * Python3
@@ -13,12 +14,17 @@ Project is created with:
 * Flask
 * RESTFUL API
 * Bcrypt
+* Less
+* SCSS
 
 ## Features
+
 * Login/ Registration validation with flash
 * Users can choose to "Keep me signed in"
 * After registration, a verification email with a confirmation link will be sent to the user's inbox
 * On the dashboard page, users can choose to view the information of listed animals and start an adoption application
+* If the pet has been adopted by the other users, the application would not go through
+* There are validations set to the application form, edit from, and pet search functions
 * Users can also check out the "About" page to get more information regarding the site
 * Users can search for local pets available for adoption from the Petfinder API
 * Users can either check out the pet's profile, start an application or add certain pets into their watchlise
