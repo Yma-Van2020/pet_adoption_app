@@ -169,3 +169,15 @@ def watchlist():
         session["watch_url"] =  watchlist_urls
     
     return redirect("/account")
+
+@app.route("/delete_watch/<int:del_index>")
+def del_watch(del_index):
+    watchlist_names = session["watch_name"]
+    watchlist_names.pop(del_index)
+    session["watch_name"] = watchlist_names
+    
+    watchlist_urls = session["watch_url"]
+    watchlist_urls.pop(del_index)
+    session["watch_url"] = watchlist_urls
+
+    return redirect("/account")
