@@ -1,7 +1,7 @@
 
 # peaking for Pets - Pet Adoption App
 
-This is a pet adoption app aiming to give users acceess to the Petfinder API
+This is a pet adoption app aiming to provide a smooth user experience and give easy acceess to the Petfinder API
 
 ## Technologies
 
@@ -14,8 +14,11 @@ Project is created with:
 * Flask
 * RESTFUL API
 * Bcrypt
-* Less
+<<<<<<< HEAD
+=======
 * SCSS
+* Less
+>>>>>>> 56236499f6759de9170f5366f261e98355cdb6c3
 
 ## Features
 
@@ -44,9 +47,9 @@ pip install Flask-Mail
 
 pipenv install python-dotenv
 
-Pipenv shell
+pipenv shell
 
-Python3 server.py
+python3 server.py
 ```
 
 
