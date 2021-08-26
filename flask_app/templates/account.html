@@ -27,6 +27,14 @@
             text-decoration: none;
             color: #6c7ae0;
         }
+
+        .adoption{
+            width: 1016px;
+            height: 650px; 
+            overflow: auto;   
+        }
+
+        
     </style>
 </head>
 
@@ -64,8 +72,8 @@
             {% endif %}
       
           
-        <h3 style="font-family: 'Dancing Script', cursive;" class="ml-5 mt-5">Pet Adoption History</h3>
-        <div class="table">
+        <h3 style="font-family: 'Dancing Script', cursive;" class="ml-5 mt-2">Pet Adoption History</h3>
+        <div class="table adoption">
             <div class="limiter">
                 <div class="container-table100">
                     <div class="wrap-table100">
@@ -96,11 +104,33 @@
                                         </tr>
                                         {% endfor %}    
                                        
-                                         </tbody>
-                              
-                    </table>
+                                         </tbody>           
+                            </table>
+                            
         </div>
     </div>
+
+<div style="position: relative; top:200px;">
+    <h2 style="font-family: 'Dancing Script', cursive;">Pet Watchlist</h2>
+    <table class="table watchlist">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Pet Name</th>
+            <th scope="col">Pet's online profile</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for i in range(watch_names |length)%}
+          <tr>
+            <td>{{watch_names[i]}}</td>
+            <td><a href="{{watch_urls[i]}}">{{watch_urls[i]}}</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    
 
     <script type="text/javascript" src="{{ url_for('static', filename='/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 

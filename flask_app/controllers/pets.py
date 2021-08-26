@@ -24,7 +24,7 @@ def add_new_re():
     if 'user_id' not in session:
         return redirect('/')
    
-    if Pet.getOnebyname(session["name"]) != False:
+    if Pet.getOnebyname(request.form["name"]) != False:
         flash("Pet is already adopted, pick another one!", "name")
         return redirect("/new/application")
     

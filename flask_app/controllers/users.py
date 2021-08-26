@@ -69,17 +69,33 @@ def confirm_email(token):
     try:
         email = s.loads(token, salt="email-confirm", max_age = 3600)
     except SignatureExpired:
-        return "<h1>The token is expired!</h1>"
+        return f"<h1>The token is expired!<br> To resend the link please input your email again: <form action={'/resend'} method={'POST'}><input type={'text'} name={'re_email'}></input>&nbsp;<input type={'submit'} value={'Resend'}></form></h1>"
+    
     data = {
         "id": session["user_id"],
         "email_is_confirm": "True"
     }
     User.update(data)
     session["email_is_confirm"] = True
-    root = "/"
-    return f"<h1>Email has been confirm successfully</h1><br><a href={root}>Go back to login page</a>"
+
+    return redirect("/account")
     
-  
+
+@app.route("/resend", methods=["POST"])
+def resend():
+    email = request.form['re_email']
+    token = s.dumps(email, salt="email-confirm")
+    
+    msg = Message("Confirm Email from Speaking for Pets", sender="candicema2018@gmail.com", recipients=[email])
+    
+    link = url_for("confirm_email", token=token, _external=True)
+    
+    msg.body = f"Please click the link below to confirm your email: {link}"
+    
+    mail.send(msg)
+    
+    return f"<h1> The email you entered is {email}.<br>Please go to your inbox to confirm your email!</h1>"
+
 @app.route('/login', methods=['POST'])
 def login():
     data = { "email" : request.form["lemail"] }
@@ -128,6 +144,28 @@ def acc():
         "id":session['user_id']
     }
     user = User.get_user_with_pets(data)
-    print(session)
-    print("Hi")
-    return render_template('account.html',user=user)
+    
+    return render_template('account.html',user=user, watch_names = session["watch_name"], watch_urls = session["watch_url"])
+
+@app.route("/watch", methods=["POST"])
+def watchlist():
+    # session["watch_name"] = request.form["pet_name"]
+    if "watch_name" in session:
+        watchlist_names = session["watch_name"]
+        watchlist_names.append(request.form["pet_name"])
+        session["watch_name"] = watchlist_names
+    else:
+        watchlist_names = []
+        watchlist_names.append(request.form["pet_name"])
+        session["watch_name"] = watchlist_names
+    # session["watch_url"] = request.form["pet_url"]
+    if "watch_url" in session:
+        watchlist_urls = session["watch_url"]
+        watchlist_urls.append(request.form["pet_url"])
+        session["watch_url"] =  watchlist_urls
+    else:
+        watchlist_urls = []
+        watchlist_urls.append(request.form["pet_url"])
+        session["watch_url"] =  watchlist_urls
+    
+    return redirect("/account")

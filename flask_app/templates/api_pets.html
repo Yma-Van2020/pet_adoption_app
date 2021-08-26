@@ -124,6 +124,12 @@
           <button class="btn btn-outline-dark m-3">
               Start an application
           </button></a>
+
+          <form action="/watch" method="POST">
+            <input type="hidden" name="pet_name" value={{names[i]}}>
+            <input type="hidden" name="pet_url" value={{urls[i]}}>
+            <input type="submit" class="btn btn-outline-dark m-1" value="Add to watchlist">
+          </form>
        </div>
     </div>
     {% endfor %}
