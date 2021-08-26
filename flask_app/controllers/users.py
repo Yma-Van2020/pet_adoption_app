@@ -145,7 +145,7 @@ def acc():
     }
     user = User.get_user_with_pets(data)
     
-    return render_template('account.html',user=user, watch_names = session["watch_name"], watch_urls = session["watch_url"])
+    return render_template('account.html',user=user)
 
 @app.route("/watch", methods=["POST"])
 def watchlist():
