@@ -38,9 +38,9 @@ pip install Flask-Mail
 
 pipenv install python-dotenv
 
-Pipenv shell
+pipenv shell
 
-Python3 server.py
+python3 server.py
 ```
 
 
