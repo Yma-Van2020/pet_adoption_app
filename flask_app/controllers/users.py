@@ -168,7 +168,7 @@ def watchlist():
         watchlist_urls.append(request.form["pet_url"])
         session["watch_url"] =  watchlist_urls
     
-    return redirect("/account")
+    return redirect("/input_search")
 
 @app.route("/delete_watch/<int:del_index>")
 def del_watch(del_index):

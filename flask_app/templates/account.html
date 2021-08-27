@@ -56,19 +56,19 @@
                 </button></a>
                 <a href="/dashboard">
                     <button class="btn btn-outline-dark m-1" >
-                        Go back
+                        Home page
                     </button></a>
             </div>
         </div>
                <!-- account verification alert -->
              {% if not session["email_is_confirm"] %}
             <div class="alert alert-warning d-flex justify-content-between" role="alert">
-                 You have NOT verify your account! Please check your email inbox
+                 You have NOT verify your account! Please check {{user.email}}'s inbox
               <input type="button" value="Close" class="btn btn-warning" onclick="hide()"/>
             </div>
             {% else %}
             <div class="alert alert-success d-flex justify-content-between" role="alert">
-                You have verify your account!
+                You have verify your email address: {{user.email}}!
              <input type="button" value="Close" class="btn btn-success" onclick="hide()"/>
            </div>
             {% endif %}
