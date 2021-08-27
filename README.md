@@ -17,6 +17,9 @@ Project is created with:
 * Bcrypt
 * SCSS
 * Less
+* Petpy
+* Beautifulsoup4
+
 
 ## Features
 
