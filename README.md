@@ -19,6 +19,7 @@ Project is created with:
 * Less
 * Petpy
 * Beautifulsoup4
+* AWS EC2 @ http://35.183.118.5/
 
 
 ## Features
