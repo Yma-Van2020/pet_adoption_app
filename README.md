@@ -1,5 +1,5 @@
 
-# peaking for Pets - Pet Adoption App
+# speaking for Pets - Pet Adoption App
 
 This is a pet adoption app aiming to provide a smooth user experience and give easy acceess to the Petfinder API
 
