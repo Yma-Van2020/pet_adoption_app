@@ -127,7 +127,7 @@
          {% for i in range(session["watch_name"] |length)%}
           <tr>
             <td>{{session["watch_name"][i]}}</td>
-            <td><a href="{{session['watch_url']}}">{{session["watch_url"][i]}}</a></td>
+            <td><a href="{{session['watch_url'][i]}}">{{session["watch_url"][i]}}</a></td>
             <td class="cell100 column3"> <a href="/delete_watch/{{i}}">delete &nbsp;<i class="far fa-trash-alt"></i></a></td>
           </tr>
         {% endfor %}
