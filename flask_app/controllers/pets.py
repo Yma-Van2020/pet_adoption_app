@@ -7,7 +7,7 @@ import petpy
 from bs4 import BeautifulSoup as bs
 import os
 import re
-CITY_REGEX = re.compile(r"^[a-zA-z]{3,},\s?[a-zA-Z]{2,}$")
+CITY_REGEX = re.compile(r"^[a-zA-z]{3,},\s[a-zA-Z]{2,}$")
 
 base=os.path.dirname(os.path.abspath(__file__))
 
@@ -140,7 +140,7 @@ def input():
     session["valid"] = True   
 
     if not CITY_REGEX.match(request.form["location"]):
-        flash("* Please follow the format of City, State (e.g. Seattle, WA)", "location")
+        flash("* Please follow the format of City, State (e.g. Seattle,[space]WA)", "location")
         session["valid"] = False 
         return redirect("/input_search")
     
