@@ -9,7 +9,7 @@ Project is created with:
 
 * JS/jquery
 * Python3
-* Html/Css/Fontawesome
+* Html/Css/Fontawesome/Google fonts
 * Boostrap
 * SQL
 * Flask
