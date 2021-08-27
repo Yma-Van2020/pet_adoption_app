@@ -149,7 +149,7 @@ def acc():
 
 @app.route("/watch", methods=["POST"])
 def watchlist():
-    # session["watch_name"] = request.form["pet_name"]
+   
     if "watch_name" in session:
         watchlist_names = session["watch_name"]
         watchlist_names.append(request.form["pet_name"])
@@ -158,7 +158,7 @@ def watchlist():
         watchlist_names = []
         watchlist_names.append(request.form["pet_name"])
         session["watch_name"] = watchlist_names
-    # session["watch_url"] = request.form["pet_url"]
+   
     if "watch_url" in session:
         watchlist_urls = session["watch_url"]
         watchlist_urls.append(request.form["pet_url"])
