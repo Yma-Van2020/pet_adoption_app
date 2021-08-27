@@ -161,8 +161,9 @@ def api():
     secret= os.environ.get("FLASK_APP_SECRET_KEY") 
     pf = petpy.Petfinder(key=key, secret=secret)
     print(session)
+
     cats = pf.animals(animal_type=session["animal"], status='adoptable', location=session["location"], distance=10,
-                  results_per_page=12, pages=1)
+                  results_per_page=12, pages=10)
 
     names = []
     pics = []
