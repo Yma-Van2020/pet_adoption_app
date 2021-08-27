@@ -13,12 +13,13 @@ Project is created with:
 * Boostrap
 * SQL
 * Flask
-* RESTFUL API
+* RestFul API
 * Bcrypt
 * SCSS
 * Less
 * Petpy
 * Beautifulsoup4
+* AWS EC2 @ http://35.183.118.5/
 
 
 ## Features
