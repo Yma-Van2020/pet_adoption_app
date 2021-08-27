@@ -13,7 +13,7 @@ Project is created with:
 * Boostrap
 * SQL
 * Flask
-* RESTFUL API
+* RestFul API
 * Bcrypt
 * SCSS
 * Less
