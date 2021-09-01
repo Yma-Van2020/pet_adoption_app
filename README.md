@@ -20,6 +20,7 @@ Project is created with:
 * Petpy
 * Beautifulsoup4
 * AWS EC2 
+* Jinja2
 
 
 ## More detailed Features
