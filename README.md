@@ -55,7 +55,7 @@ pipenv shell
 python3 server.py
 ```
 
-##Demo 
+## Demo 
 ![Screen Shot 2021-09-04 at 9 15 11 PM](https://user-images.githubusercontent.com/74885386/132115290-2c10d08a-de66-43f0-9d2b-35a1e8dcfb89.png)
 ![Screen Shot 2021-09-04 at 9 24 11 PM](https://user-images.githubusercontent.com/74885386/132115291-6bc215bb-5756-42ce-ae81-df3dc101e855.png)
 ![Screen Shot 2021-09-04 at 9 16 18 PM](https://user-images.githubusercontent.com/74885386/132115292-e5a6d6d5-a9fb-46b5-8619-f707a14f4e63.png)
