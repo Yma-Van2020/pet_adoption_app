@@ -7,10 +7,12 @@ This is a pet adoption app aiming to provide a smooth user experience and give e
 
 Project is created with:
 
-* JS/jquery
+* JS
+* JQuery
 * Python3
 * Html/Css/Fontawesome/Google fonts
 * Boostrap
+* UI/UX design 
 * SQL
 * Flask
 * RestFul API
